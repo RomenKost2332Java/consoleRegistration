@@ -2,22 +2,17 @@ package com.controller;
 
 import com.model.Group;
 import com.model.Note;
-import com.view.Languages;
+import com.view.Messages;
 import com.view.View;
 
-import java.util.Locale;
-import java.util.ResourceBundle;
 import java.util.Scanner;
 
 public class RegistrationService {
-    private static final String RESOURCE_BUNDLE_NAME = "messages";
 
     private final Note note;
     private final View view;
 
     private final Scanner scanner;
-
-    private final ResourceBundle resourceBundle = ResourceBundle.getBundle(RESOURCE_BUNDLE_NAME, new Locale(Languages.UA));
 
     public RegistrationService(Note note, View view, Scanner scanner){
         this.note = note;
@@ -26,43 +21,50 @@ public class RegistrationService {
     }
 
     public void process(){
-        note.setFirstName(readString(Regex.name));
-        note.setSecondName(readString(Regex.name));
-        note.setThirdName(readString(Regex.name));
+        note.setSecondName(readString(Regex.name, Messages.getSecondName));
+        note.setFirstName(readString(Regex.name, Messages.getFirstName));
+        note.setThirdName(readString(Regex.name, Messages.getThirdName));
         note.generateName();
 
-        note.setNickname(readString(Regex.nickname));
-        note.setComment(readString(Regex.any));
+        note.setNickname(readString(Regex.nickname, Messages.getNickname));
+        note.setComment(readString(Regex.any, Messages.getComment));
         note.setGroup(validationGroup());
 
-        note.setHomeNumber(readString(Regex.homeNumber));
-        note.setFirstMobileNumber(readString(Regex.firstMobileNumber));
-        note.setSecondMobileNumber(readString(Regex.secondMobileNumber));
+        note.setHomeNumber(readString(Regex.homeNumber, Messages.getHomeNumber));
+        note.setFirstMobileNumber(readString(Regex.firstMobileNumber, Messages.getFirstMobileNumber));
+        note.setSecondMobileNumber(readString(Regex.secondMobileNumber, Messages.getSecondMobileNumber));
 
-        note.setEmail(readString(Regex.email));
-        note.setSkype(readString(Regex.nickname));
+        note.setEmail(readString(Regex.email, Messages.getEmail));
+        note.setSkype(readString(Regex.nickname, Messages.getSkype));
 
-        note.setPostIndex(Integer.parseInt(readString(Regex.index)));
-        note.setCity(Regex.nameWithDigits);
-        note.setStreet(Regex.nameWithDigits);
-        note.setHouse(Regex.house);
-        note.setFlat(Regex.flat);
+        note.setPostIndex(Integer.parseInt(readString(Regex.index, Messages.getIndex)));
+        note.setCity(readString(Regex.nameWithDigits, Messages.getCity));
+        note.setStreet(readString(Regex.nameWithDigits, Messages.getStreet));
+        note.setHouse(readString(Regex.house, Messages.getHouse));
+        note.setFlat(readString(Regex.flat, Messages.getFlat));
 
         note.generateFullAddress();
     }
 
     private String validationGroup(){
-        String group = readString(Regex.any);
+        String group = readString(Regex.any, Messages.getGroup);
         while (!Group.contain(group)){
-            group = readString(Regex.any);
+            view.printString(ResourceBundleManager.getString(Messages.wrongInput));
+            group = readString(Regex.any, Messages.getGroup);
         }
         return group;
     }
 
-    private String readString(String patternName){
-        while (!scanner.hasNext(resourceBundle.getString(patternName))){
+    private String readString(String pattern, String inputMessage){
+        pattern = ResourceBundleManager.getString(pattern);
+        inputMessage = ResourceBundleManager.getString(inputMessage);
+        view.printString(inputMessage);
+        inputMessage = ResourceBundleManager.getString(Messages.wrongInput) + inputMessage;
+
+        while (!scanner.hasNext(pattern)){
+            view.printString(inputMessage);
             scanner.next();
         }
-        return scanner.nextLine();
+        return scanner.next();
     }
 }
