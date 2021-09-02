@@ -8,5 +8,6 @@ public class Model {
 
     public void addNote(Note note){
         notebook.add(note);
+
     }
 }

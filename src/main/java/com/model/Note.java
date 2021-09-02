@@ -32,15 +32,15 @@ public class Note {
 
     private String fullAddress;
 
-    private final Date creationData = new Date();
-    private Date lastUpdateData = new Date();
+    private Date addDate = new Date();
+    private Date lastUpdateDate = new Date();
 
     public String getFirstName() {
         return firstName;
     }
 
     public void setFirstName(String firstName) {
-        lastUpdateData = new Date();
+        lastUpdateDate = new Date();
         this.firstName = firstName;
     }
 
@@ -49,7 +49,7 @@ public class Note {
     }
 
     public void setSecondName(String secondName) {
-        lastUpdateData = new Date();
+        lastUpdateDate = new Date();
         this.secondName = secondName;
     }
 
@@ -58,7 +58,7 @@ public class Note {
     }
 
     public void setThirdName(String thirdName) {
-        lastUpdateData = new Date();
+        lastUpdateDate = new Date();
         this.thirdName = thirdName;
     }
 
@@ -67,7 +67,7 @@ public class Note {
     }
 
     public void setNickname(String nickname) {
-        lastUpdateData = new Date();
+        lastUpdateDate = new Date();
         this.nickname = nickname;
     }
 
@@ -76,7 +76,7 @@ public class Note {
     }
 
     public void setComment(String comment) {
-        lastUpdateData = new Date();
+        lastUpdateDate = new Date();
         this.comment = comment;
     }
 
@@ -85,16 +85,21 @@ public class Note {
     }
 
     public void setGroup(Group group) {
-        lastUpdateData = new Date();
+        lastUpdateDate = new Date();
         this.group = group;
     }
+
+    public void setGroup(String group) {
+        setGroup(Group.valueOf(group));
+    }
+
 
     public String getHomeNumber() {
         return homeNumber;
     }
 
     public void setHomeNumber(String homeNumber) {
-        lastUpdateData = new Date();
+        lastUpdateDate = new Date();
         this.homeNumber = homeNumber;
     }
 
@@ -103,7 +108,7 @@ public class Note {
     }
 
     public void setFirstMobileNumber(String firstMobileNumber) {
-        lastUpdateData = new Date();
+        lastUpdateDate = new Date();
         this.firstMobileNumber = firstMobileNumber;
     }
 
@@ -112,7 +117,7 @@ public class Note {
     }
 
     public void setSecondMobileNumber(String secondMobileNumber) {
-        lastUpdateData = new Date();
+        lastUpdateDate = new Date();
         this.secondMobileNumber = secondMobileNumber;
     }
 
@@ -121,7 +126,7 @@ public class Note {
     }
 
     public void setEmail(String email) {
-        lastUpdateData = new Date();
+        lastUpdateDate = new Date();
         this.email = email;
     }
 
@@ -130,7 +135,7 @@ public class Note {
     }
 
     public void setSkype(String skype) {
-        lastUpdateData = new Date();
+        lastUpdateDate = new Date();
         this.skype = skype;
     }
 
@@ -139,7 +144,7 @@ public class Note {
     }
 
     public void setPostIndex(int postIndex) {
-        lastUpdateData = new Date();
+        lastUpdateDate = new Date();
         this.postIndex = postIndex;
     }
 
@@ -148,7 +153,7 @@ public class Note {
     }
 
     public void setCity(String city) {
-        lastUpdateData = new Date();
+        lastUpdateDate = new Date();
         this.city = city;
     }
 
@@ -157,7 +162,7 @@ public class Note {
     }
 
     public void setStreet(String street) {
-        lastUpdateData = new Date();
+        lastUpdateDate = new Date();
         this.street = street;
     }
 
@@ -166,7 +171,7 @@ public class Note {
     }
 
     public void setHouse(String house) {
-        lastUpdateData = new Date();
+        lastUpdateDate = new Date();
         this.house = house;
     }
 
@@ -175,7 +180,7 @@ public class Note {
     }
 
     public void setFlat(String flat) {
-        lastUpdateData = new Date();
+        lastUpdateDate = new Date();
         this.flat = flat;
     }
 
@@ -187,12 +192,12 @@ public class Note {
         return fullAddress;
     }
 
-    public Date getCreationData() {
-        return creationData;
+    public Date getAddDate() {
+        return addDate;
     }
 
-    public Date getLastUpdateData() {
-        return lastUpdateData;
+    public Date getLastUpdateDate() {
+        return lastUpdateDate;
     }
 
     public void generateName(){
@@ -208,5 +213,9 @@ public class Note {
                 + street + DELIMITER
                 + house + DELIMITER
                 + flat;
+    }
+
+    public void setAddData(){
+        addDate = new Date();
     }
 }
