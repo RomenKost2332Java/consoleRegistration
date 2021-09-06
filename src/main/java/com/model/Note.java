@@ -215,7 +215,7 @@ public class Note {
                 + flat;
     }
 
-    public void setAddData(){
+    public void setAddDate(){
         addDate = new Date();
     }
 }

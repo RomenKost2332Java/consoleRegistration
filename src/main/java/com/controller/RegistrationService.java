@@ -59,12 +59,11 @@ public class RegistrationService {
         pattern = ResourceBundleManager.getString(pattern);
         inputMessage = ResourceBundleManager.getString(inputMessage);
         view.printString(inputMessage);
-        inputMessage = ResourceBundleManager.getString(Messages.wrongInput) + inputMessage;
 
-        while (!scanner.hasNext(pattern)){
-            view.printString(inputMessage);
-            scanner.next();
+        String res;
+        while (!scanner.hasNext() || !(res = scanner.next()).matches(pattern)) {
+            view.printString(ResourceBundleManager.getString(Messages.wrongInput) + inputMessage);
         }
-        return scanner.next();
+        return res;
     }
 }

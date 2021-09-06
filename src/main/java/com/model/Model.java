@@ -8,6 +8,10 @@ public class Model {
 
     public void addNote(Note note){
         notebook.add(note);
+        note.setAddDate();
+    }
 
+    public List<Note> getNotebook() {
+        return new ArrayList<>(notebook);
     }
 }
