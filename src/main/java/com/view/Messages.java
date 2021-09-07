@@ -22,5 +22,6 @@ public interface Messages {
     String getHouse = "messages.registration.get.house";
     String getFlat = "messages.registration.get.flat";
 
-    String wrongInput = "messages.registration.wrongInput";
+    String wrongInput = "messages.registration.errors.wrongInput";
+    String nicknameAlreadyExist = "messages.registration.errors.nicknameAlreadyExist";
 }

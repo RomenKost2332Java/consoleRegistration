@@ -14,4 +14,11 @@ public class Model {
     public List<Note> getNotebook() {
         return new ArrayList<>(notebook);
     }
+
+    public boolean hasNickname(String nickname){
+        return notebook.stream()
+                .anyMatch(note ->
+                        nickname.equals(note.getNickname())
+                );
+    }
 }

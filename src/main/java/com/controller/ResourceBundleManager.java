@@ -8,7 +8,7 @@ public abstract class ResourceBundleManager {
     private static final String EN = "en";
 
     private static final String RESOURCE_BUNDLE_NAME = "messages";
-    private static final ResourceBundle resourceBundle = ResourceBundle.getBundle(RESOURCE_BUNDLE_NAME, new Locale(UA));
+    private static final ResourceBundle resourceBundle = ResourceBundle.getBundle(RESOURCE_BUNDLE_NAME, new Locale(EN));
 
     public static String getString(String key){
         return resourceBundle.getString(key);

@@ -1,5 +1,7 @@
 package com.model;
 
+import com.controller.NicknameAlreadyUsedException;
+
 import java.util.Date;
 
 public class Note {
@@ -66,9 +68,12 @@ public class Note {
         return nickname;
     }
 
-    public void setNickname(String nickname) {
-        lastUpdateDate = new Date();
+    public void setNickname(String nickname, Model model) throws NicknameAlreadyUsedException {
+        if (model.hasNickname(nickname)){
+            throw new NicknameAlreadyUsedException(nickname);
+        }
         this.nickname = nickname;
+        lastUpdateDate = new Date();
     }
 
     public String getComment() {

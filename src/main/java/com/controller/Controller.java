@@ -22,8 +22,15 @@ public class Controller {
     }
 
     public void registerNote(Note note){
-        RegistrationService registrationService = new RegistrationService(note, view, scanner);
-        registrationService.process();
         model.addNote(note);
+
+        RegistrationService registrationService = new RegistrationService(model, view);
+        registrationService.setScanner(scanner);
+
+        registrationService.setNote(note);
+        registrationService.setContacts();
+
+        registrationService.setNote(new Note());
+        registrationService.setContacts();
     }
 }
