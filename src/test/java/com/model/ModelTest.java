@@ -14,9 +14,8 @@ public class ModelTest {
     @BeforeClass
     public static void initializationModel(){
         Note note = new Note();
+        note.setNickname(nickname1);
         model.addNote(note);
-
-        note.setNickname(nickname1, model);
     }
 
     @Test
@@ -28,9 +27,8 @@ public class ModelTest {
     @Test(expected = NicknameAlreadyUsedException.class)
     public void setNicknameTest(){
         Note note = new Note();
+        note.setNickname(nickname1);
         model.addNote(note);
-
-        note.setNickname(nickname1, model);
     }
 
 }

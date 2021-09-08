@@ -1,7 +1,6 @@
 package com.controller;
 
 import com.model.Group;
-import com.model.Model;
 import com.model.Note;
 import com.view.Messages;
 import com.view.View;
@@ -10,13 +9,11 @@ import java.util.Scanner;
 
 public class RegistrationService {
     private final View view;
-    private final Model model;
 
     private Scanner scanner;
     private Note note;
 
-    public RegistrationService(Model model, View view){
-        this.model = model;
+    public RegistrationService(View view){
         this.view = view;
     }
 
@@ -29,12 +26,13 @@ public class RegistrationService {
     }
 
     public void process(){
-        setName();
-        setContacts();
-        setAddress();
+        fillName();
+        fillNickname();
+        fillContacts();
+        fillAddress();
     }
 
-    public void setName(){
+    public void fillName(){
         note.setSecondName(readString(
                 ResourceBundleManager.getString(Regex.name),
                 ResourceBundleManager.getString(Messages.getSecondName)
@@ -48,14 +46,13 @@ public class RegistrationService {
                 ResourceBundleManager.getString(Messages.getThirdName)
         ));
         note.generateName();
-    }
-
-    public void setContacts(){
         note.setComment(readString(
                 ResourceBundleManager.getString(Regex.any),
                 ResourceBundleManager.getString(Messages.getComment)
         ));
-        setNickname();
+    }
+
+    public void fillContacts(){
         note.setGroup(validationGroup());
         note.setHomeNumber(readString(
                 ResourceBundleManager.getString(Regex.homeNumber),
@@ -69,7 +66,6 @@ public class RegistrationService {
                 ResourceBundleManager.getString(Regex.secondMobileNumber),
                 ResourceBundleManager.getString(Messages.getSecondMobileNumber)
         ));
-
         note.setEmail(readString(
                 ResourceBundleManager.getString(Regex.email),
                 ResourceBundleManager.getString(Messages.getEmail)
@@ -80,7 +76,7 @@ public class RegistrationService {
         ));
     }
 
-    public void setAddress(){
+    public void fillAddress(){
         note.setPostIndex(Integer.parseInt(readString(
                 ResourceBundleManager.getString(Regex.index),
                 ResourceBundleManager.getString(Messages.getIndex)
@@ -116,19 +112,11 @@ public class RegistrationService {
         return group;
     }
 
-    private void setNickname(){
-        boolean status = false;
-        while (!status){
-            try {
-                note.setNickname(readString(
+    public void fillNickname(){
+        note.setNickname(readString(
                         ResourceBundleManager.getString(Regex.nickname),
                         ResourceBundleManager.getString(Messages.getNickname)
-                ), model);
-                status = true;
-            } catch (NicknameAlreadyUsedException e){
-                view.printString(ResourceBundleManager.getString(Messages.nicknameAlreadyExist));
-            }
-        }
+        ));
     }
 
     private String readString(String pattern, String inputMessage){

@@ -1,14 +1,16 @@
 package com.controller;
 
-public class NicknameAlreadyUsedException extends RuntimeException {
-    private final String nickname;
+import com.model.Note;
 
-    public NicknameAlreadyUsedException(String nickname){
+public class NicknameAlreadyUsedException extends RuntimeException {
+    private final Note note;
+
+    public NicknameAlreadyUsedException(Note note){
         super();
-        this.nickname = nickname;
+        this.note = note;
     }
 
-    public String getNickname() {
-        return nickname;
+    public Note getNote() {
+        return note;
     }
 }
